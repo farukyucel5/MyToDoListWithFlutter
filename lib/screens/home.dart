@@ -16,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
     List<String> todo =["Study Lessons","Run 5K","Go to party"];
     List<String> completed = ["Game meetup","Take out trash"];
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home:SafeArea(
           child: Scaffold(
               body:Column(
