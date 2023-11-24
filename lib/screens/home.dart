@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/screens/add_new_task.dart';
 
 import '../containers.dart';
 import '../todoitem.dart';
@@ -62,7 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder:(context)=>const AddNewTaskScreen()),
+                        );
+                      },
                       child: const Text("Add New Task")
                   )
                 ],
