@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<String> todo =["Study Lessons","Run 5K","Go to party"];
-    List<String> completed = ["Game meetup","Take out trash"];
+    List<String> completed = ["Game meetup","Take out trash","Reading up on the OOP"];
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home:SafeArea(
@@ -25,16 +25,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(20,10,20,10),
-                      child: SingleChildScrollView(
+
                           child: ListView.builder(
-                              primary: false,
-                              shrinkWrap: true,
+                             // primary: false,
+                              //shrinkWrap: true,
                               itemCount: todo.length,
                               itemBuilder: (context,index) {
                                 return TodoItem(title:todo[index]);
                               }
                           )
-                      ),
+
                     ),
                   ),
                   const Padding(
@@ -50,16 +50,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(20,10,20,10),
-                      child: SingleChildScrollView(
                           child: ListView.builder(
-                              shrinkWrap: true,
-                              primary: false,
+                              //shrinkWrap: true,
+                              //primary: false,
                               itemCount: completed.length,
                               itemBuilder: (context,index) {
                                 return TodoItem(title: completed[index]);
                               }
                           )
-                      ),
+
                     ),
                   ),
                   ElevatedButton(
