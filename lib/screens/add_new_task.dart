@@ -132,8 +132,6 @@ class AddNewTaskScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 20),
                         child: Column(
                           children: [
                             Text("Time"),
@@ -145,7 +143,6 @@ class AddNewTaskScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                      ),
                     )
                   ],
                 ),
