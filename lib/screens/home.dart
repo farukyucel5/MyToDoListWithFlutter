@@ -14,46 +14,52 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Task> todo = [
+    Task(
+        type: TaskType.note,
+        title:"Study Lessons" ,
+        description: "Study Dart",
+        isCompleted: false
+    ),
+    Task(
+        type: TaskType.contest,
+        title:"Run 5K" ,
+        description: "run 5k three days a week",
+        isCompleted: false
+    ),
+    Task(
+        type: TaskType.calender,
+        title:"Go to party" ,
+        description: "Attend the party",
+        isCompleted: false
+    )
+  ];
+
+  List<Task> completed = [
+    Task(
+        type: TaskType.contest,
+        title:"Run 5K" ,
+        description: "run 5k three days a week",
+        isCompleted: false
+    ),
+    Task(
+        type: TaskType.calender,
+        title:"Go to party" ,
+        description: "Attend the party",
+        isCompleted: false
+    )
+
+  ];
+  void addNewTask(Task newTask){
+    setState(() {
+      todo.add(newTask);
+    });
+  }
   @override
   Widget build(BuildContext context) {
    //List<String> todo =["Study Lessons","Run 5K","Go to party"];
    //List<String> completed = ["Game meetup","Take out trash","Reading up on the OOP"];
-    List<Task> todo = [
-      Task(
-          type: TaskType.note,
-          title:"Study Lessons" ,
-          description: "Study Dart",
-          isCompleted: false
-      ),
-      Task(
-          type: TaskType.contest,
-          title:"Run 5K" ,
-          description: "run 5k three days a week",
-          isCompleted: false
-      ),
-      Task(
-          type: TaskType.calender,
-          title:"Go to party" ,
-          description: "Attend the party",
-          isCompleted: false
-      )
-    ];
 
-    List<Task> completed = [
-      Task(
-          type: TaskType.contest,
-          title:"Run 5K" ,
-          description: "run 5k three days a week",
-          isCompleted: false
-      ),
-      Task(
-          type: TaskType.calender,
-          title:"Go to party" ,
-          description: "Attend the party",
-          isCompleted: false
-      )
-
-    ];
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home:SafeArea(
@@ -103,7 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder:(context)=>const AddNewTaskScreen()),
+                          MaterialPageRoute(builder:(context)=> AddNewTaskScreen(
+                            addNewTask:(newTask) => addNewTask(newTask),
+                          )),
                         );
                       },
                       child: const Text("Add New Task")

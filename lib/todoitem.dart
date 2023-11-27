@@ -26,7 +26,7 @@ class _TodoItemState extends State<TodoItem> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             widget.task.type==TaskType.note? Image.asset("lib/assets/images/category.png",width: 30,height: 30):
-                widget.task.type==TaskType.contest?
+                widget.task.type==TaskType.calender?
                     Image.asset("lib/assets/images/calendar.png",width: 30,height: 30):
                     Image.asset("lib/assets/images/trophy.png",width: 30,height: 30),
             Expanded(

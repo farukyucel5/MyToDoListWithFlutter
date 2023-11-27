@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:to_do_app/constants/tasktype.dart';
 
 import '../constants/colorsConstants.dart';
+import '../model/task.dart';
 
-class AddNewTaskScreen extends StatelessWidget {
-  const AddNewTaskScreen({super.key});
+class AddNewTaskScreen extends StatefulWidget {
+  const AddNewTaskScreen({super.key,required this.addNewTask});
+  final void Function(Task newTask) addNewTask;
+
+
+
+
+  @override
+  State<AddNewTaskScreen> createState() => _AddNewTaskScreenState();
+}
+
+class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
+  TextEditingController titleController =TextEditingController();
+  TextEditingController dateController =TextEditingController();
+  TextEditingController timeController =TextEditingController();
+  TextEditingController descriptionController =TextEditingController();
+  TaskType taskType =TaskType.note;
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +70,9 @@ class AddNewTaskScreen extends StatelessWidget {
               ),
 
 
-              const TextField(
-                  decoration: InputDecoration(filled: true,fillColor: Colors.white60),
+               TextField(
+                 controller: titleController,
+                  decoration: const InputDecoration(filled: true,fillColor: Colors.white60),
                 ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -70,6 +88,9 @@ class AddNewTaskScreen extends StatelessWidget {
                             duration: Duration(microseconds:100),
                           )
                         );
+                        setState(() {
+                          taskType= TaskType.note;
+                        });
                       },
                       child: Image.asset(
                         "lib/assets/images/category.png",
@@ -86,6 +107,9 @@ class AddNewTaskScreen extends StatelessWidget {
                               duration: Duration(microseconds:100),
                             )
                         );
+                        setState(() {
+                          taskType= TaskType.calender;
+                        });
                       },
                       child: Image.asset(
                         "lib/assets/images/calendar.png",
@@ -102,6 +126,9 @@ class AddNewTaskScreen extends StatelessWidget {
                               duration: Duration(microseconds:100),
                             )
                         );
+                        setState(() {
+                          taskType= TaskType.contest;
+                        });
                       },
                       child: Image.asset(
                         "lib/assets/images/trophy.png",
@@ -114,7 +141,7 @@ class AddNewTaskScreen extends StatelessWidget {
                 ),
               ),
 
-              const Padding(
+               Padding(
                 padding:  EdgeInsets.only(top: 20),
                 child:  Row(
                   children: [
@@ -125,20 +152,22 @@ class AddNewTaskScreen extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             child: TextField(
-                              decoration: InputDecoration(filled: true,fillColor: Colors.white60),
+                              controller: dateController,
+                              decoration: const InputDecoration(filled: true,fillColor: Colors.white60),
                             ),
                           )
                         ],
                       ),
                     ),
-                    Expanded(
+                     Expanded(
                         child: Column(
                           children: [
-                            Text("Time"),
+                            const Text("Time"),
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               child: TextField(
-                                decoration: InputDecoration(filled: true,fillColor: Colors.white60),
+                                controller: timeController,
+                                decoration: const InputDecoration(filled: true,fillColor: Colors.white60),
                               ),
                             )
                           ],
@@ -147,17 +176,18 @@ class AddNewTaskScreen extends StatelessWidget {
                   ],
                 ),
               ),
-               const Padding(
-                 padding:  EdgeInsets.only(top: 20),
+              Padding(
+                 padding:  const EdgeInsets.only(top: 20),
                  child:  Column(
                   children: [
-                    Text("Notes"),
+                    const Text("Description"),
                     SizedBox(
                       height: 300,
                         child: TextField(
+                          controller: descriptionController,
                           expands: true,
                           maxLines: null,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             filled: true,fillColor: Colors.white,isDense: true
                           ),
 
@@ -169,7 +199,16 @@ class AddNewTaskScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Task newTask =Task(
+                          type: taskType,
+                          title: titleController.text,
+                          description: descriptionController.text,
+                          isCompleted:false
+                      );
+                      widget.addNewTask(newTask);
+                      Navigator.of(context).pop();
+                    },
                     child: const Text("Save",style: TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.bold,
